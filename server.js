@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 
 const cors = require('cors')
+var port = process.env.PORT || 8000;
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track')
@@ -43,6 +44,6 @@ app.use((err, req, res, next) => {
         .send(errMessage)
 })
 
-const listener = app.listen(process.env.PORT || 3000, () => {
-    console.log('Your app is listening on port ' + listener.address().port)
-})
+app.listen(port, function () {
+    console.log(`Listening to requests on http://localhost:${port}`);
+});
