@@ -1,0 +1,23 @@
+{
+  "name": "exercise-tracker",
+  "version": "1.0.0",
+  "description": "A node app intended to track exercise",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": ["mongo", "express", "node", "javascript"],
+  "repository": "git@github.com:juanramirezcastaneda/exercise-tracker.git",
+  "author": "juanramirezcastaneda <juanramirezcastaneda@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongo-db": "1.0.2",
+    "mongoose": "5.8.11"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.2"
+  }
+}
