@@ -12,6 +12,8 @@ mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track', {
     useUnifiedTopology: true
 });
 
+app.use(express.static(__dirname));
+
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));

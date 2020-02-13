@@ -1,3 +1,10 @@
-.container{
-    display: flex;
+body {
+  padding: 1rem;
+  background-color: #ddd;
+  color: #333;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
 }

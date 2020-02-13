@@ -6,13 +6,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body {
-        background-color: #ddd;
-        color: #333;
-        font-family: sans-serif;
-      }
-    </style>
+    <link
+      href="/public/stylesheets/style.css"
+      rel="stylesheet"
+      type="text/css"
+    />
   </head>
 
   <body>
@@ -21,36 +19,36 @@
         Exercise Tracker
       </h1>
     </header>
-    <main>      
+    <main>
       <div class="container">
-          <section class="new-user">            
-            <div>
-              <h2>Create a New User</h2>
-            </div>   
-            <div>
-              <span>POST /api/exercise/new-user</span>
-            </div>         
-            <div>
-              <input type="text" placeholder="username">
-            </div>
-            <div>
-              <button>Submit</button>
-            </div>
-          </section> 
-          <section class="add-exercises">            
-            <div>
-              <h2>Add exercises</h2>
-            </div>   
-            <div>
-              <span>POST /api/exercise/add</span>
-            </div>         
-            <div>
-              <input type="text" placeholder="userid">
-            </div>
-            <div>
-              <button>Submit</button>
-            </div>
-          </section>        
+        <section class="new-user">
+          <div>
+            <h2>Create a New User</h2>
+          </div>
+          <div>
+            <span>POST /api/exercise/new-user</span>
+          </div>
+          <div>
+            <input type="text" placeholder="username" />
+          </div>
+          <div>
+            <button>Submit</button>
+          </div>
+        </section>
+        <section class="add-exercises">
+          <div>
+            <h2>Add exercises</h2>
+          </div>
+          <div>
+            <span>POST /api/exercise/add</span>
+          </div>
+          <div>
+            <input type="text" placeholder="userid" />
+          </div>
+          <div>
+            <button>Submit</button>
+          </div>
+        </section>
       </div>
     </main>
   </body>
