@@ -7,13 +7,27 @@ body {
 
 .container {
   display: flex;
+  flex-direction: column;
 }
 
-.container > section{
-  padding-right: 1rem;
+.container-section{
+  display: flex;
+}
+
+.container-section > section {
+  flex: 1 1 auto;
+  margin-right: 5rem;
+  padding: 1rem;
+  background-color: #87D37C;
+}
+
+.container-section > section:last-of-type { 
+  margin-right: 0rem;
+
 }
 
 section > *,
 section > div > * {
   width: 100%;
+  box-sizing: border-box;
 }
