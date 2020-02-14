@@ -26,8 +26,8 @@
             <div>
               <h2>Create a New User</h2>
             </div>
-            <div>
-              <span class="signature">POST /api/exercise/new-user</span>
+            <div class="signature">
+              <span>POST /api/exercise/new-user</span>
             </div>
             <div>
               <input type="text" placeholder="username" />
@@ -40,8 +40,8 @@
             <div>
               <h2>Add exercises</h2>
             </div>
-            <div>
-              <span class="signature">POST /api/exercise/add</span>
+            <div class="signature">
+              <span>POST /api/exercise/add</span>
             </div>
             <div>
               <input type="text" placeholder="userid*" />
@@ -63,9 +63,9 @@
         <div>
           <div>
             <h2>GET users's exercise log:</h2>
-            <span class="signature"
-              >GET /api/exercise/log?{userId}[&from][&to][&limit]</span
-            >
+            <div class="signature">
+              <span>GET /api/exercise/log?{userId}[&from][&to][&limit]</span>
+            </div>
           </div>
           <div>
             { } = required, [ ] = optional from, to = dates (yyyy-mm-dd); limit

@@ -21,9 +21,17 @@ body {
   background-color: #87D37C;
 }
 
+.container-section > section input,
+.signature {
+  margin-bottom: 1rem;
+}
+
+.signature{
+  background-color: bisque;
+}
+
 .container-section > section:last-of-type { 
   margin-right: 0rem;
-
 }
 
 section > *,
