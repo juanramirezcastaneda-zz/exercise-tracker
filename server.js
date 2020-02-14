@@ -7,7 +7,7 @@ const cors = require('cors');
 var port = process.env.PORT || 8000;
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track', {
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/exercise-track', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
