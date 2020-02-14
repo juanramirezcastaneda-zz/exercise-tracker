@@ -1,3 +1,5 @@
+'use-strict';
+
 require('dotenv').config();
 const express = require('express');
 const app = express();
@@ -12,19 +14,35 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/exercise-track
     useUnifiedTopology: true
 });
 
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+    username: { type: String, required: true }
+});
+
+var User = new mongoose.model("User", userSchema);
+
 app.use(express.static(__dirname));
-
 app.use(cors());
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-
 app.use(express.static('public'));
+
+app.post('/api/exercise/new-user', async (req, res, next) => {
+    const username = req.body.username;
+    const user = new User({ username: username });
+
+    try {
+        const newUser = await user.save();
+        res.json({ username: newUser.username, _id: newUser._id });
+    } catch (error) {
+        next({ message: error });
+    }
+});
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 });
-
 
 // Not found middleware
 app.use((req, res, next) => {
