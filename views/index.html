@@ -30,10 +30,10 @@
               <span>POST /api/exercise/new-user</span>
             </div>
             <div>
-              <input type="text" placeholder="username" />
+              <input type="text" placeholder="username" id="user-name" />
             </div>
             <div>
-              <button>Submit</button>
+              <button id="exercise-user-submit">Submit</button>
             </div>
           </section>
           <section class="add-exercises">
@@ -44,19 +44,23 @@
               <span>POST /api/exercise/add</span>
             </div>
             <div>
-              <input type="text" placeholder="userid*" />
+              <input type="text" placeholder="userid*" id="user-id" />
             </div>
             <div>
-              <input type="text" placeholder="description*" />
+              <input type="text" placeholder="description*" id="description" />
             </div>
             <div>
-              <input type="text" placeholder="duration* (mins.)" />
+              <input
+                type="text"
+                placeholder="duration* (mins.)"
+                id="duration"
+              />
             </div>
             <div>
-              <input type="text" placeholder="date (yyyy-mm-dd)" />
+              <input type="text" placeholder="date (yyyy-mm-dd)" id="date" />
             </div>
             <div>
-              <button>Submit</button>
+              <button id="exercise-submit">Submit</button>
             </div>
           </section>
         </div>
@@ -75,4 +79,24 @@
       </div>
     </main>
   </body>
+  <script>
+    const usernameSubmit = document.getElementById("exercise-user-submit");
+    const exerciseSubmit = document.getElementById("exercise-submit");
+
+    usernameSubmit.onclick = evt => {
+      var user = document.getElementById("user-name");
+      console.log(user.value);
+    };
+
+    exerciseSubmit.onclick = evt => {
+      var userId = document.getElementById("user-id");
+      var date = document.getElementById("date");
+      var description = document.getElementById("description");
+      var duration = document.getElementById("duration");
+      console.log(userId.value);
+      console.log(date.value);
+      console.log(description.value);
+      console.log(duration.value);
+    };
+  </script>
 </html>
