@@ -50,12 +50,19 @@ app.post('/api/exercise/new-user', async (req, res, next) => {
 
 app.post('/api/exercise/add', async (req, res, next) => {
     const { userId, description, duration, date } = req.body;
+    const exercise = new Exercise({
+        userId: userId,
+        description: description,
+        duration: Number.parseInt(duration),
+        date: date
+    });
 
-    console.log(userId);
-    console.log(description);
-    console.log(duration);
-    console.log(date);
-
+    try {
+        const newExercise = { userId, description, duration, date };
+        res.json(newExercise);
+    } catch (error) {
+        next({ message: error });
+    }
 });
 
 app.get('/', (req, res) => {

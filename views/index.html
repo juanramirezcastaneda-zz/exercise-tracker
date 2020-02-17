@@ -92,6 +92,18 @@
       });
     };
 
+    const createNewExercise = (userId, date, description, duration) => {
+      const payload = {userId, date, description, duration};
+
+      return fetch("/api/exercise/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+    }
+
     const userNameSubmit = document.getElementById("exercise-user-submit");
     const exerciseSubmit = document.getElementById("exercise-submit");
 
@@ -105,10 +117,7 @@
       var date = document.getElementById("date");
       var description = document.getElementById("description");
       var duration = document.getElementById("duration");
-      console.log(userId.value);
-      console.log(date.value);
-      console.log(description.value);
-      console.log(duration.value);
+      createNewExercise(userId.value, date.value, description.value, duration.value);
     };
   </script>
 </html>
