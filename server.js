@@ -58,8 +58,15 @@ app.post('/api/exercise/add', async (req, res, next) => {
     });
 
     try {
-        const newExercise = { userId, description, duration, date };
-        res.json(newExercise);
+        const newExercise = await exercise.save();
+
+        res.json({
+            _id: newExercise._id,
+            description: newExercise.description,
+            duration: newExercise.duration,
+            date: newExercise.date,
+            userId: newExercise.userId
+        });
     } catch (error) {
         next({ message: error });
     }
