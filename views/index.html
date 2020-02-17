@@ -80,12 +80,24 @@
     </main>
   </body>
   <script>
-    const usernameSubmit = document.getElementById("exercise-user-submit");
+    const createNewUser = userName => {
+      const data = { userName: userName };
+
+      return fetch("/api/exercise/new-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+    };
+
+    const userNameSubmit = document.getElementById("exercise-user-submit");
     const exerciseSubmit = document.getElementById("exercise-submit");
 
-    usernameSubmit.onclick = evt => {
-      var user = document.getElementById("user-name");
-      console.log(user.value);
+    userNameSubmit.onclick = evt => {
+      var userName = document.getElementById("user-name");
+      createNewUser(userName.value);
     };
 
     exerciseSubmit.onclick = evt => {

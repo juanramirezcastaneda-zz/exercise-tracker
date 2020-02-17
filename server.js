@@ -37,8 +37,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.post('/api/exercise/new-user', async (req, res, next) => {
-    const username = req.body.username;
-    const user = new User({ username: username });
+    const { userName } = req.body;
+    const user = new User({ username: userName });
 
     try {
         const newUser = await user.save();
