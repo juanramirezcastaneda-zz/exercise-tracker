@@ -20,7 +20,15 @@ var userSchema = new Schema({
     username: { type: String, required: true }
 });
 
+var exerciseSchema = new Schema({
+    userId: { type: String, required: true },
+    description: { type: String, required: true },
+    duration: { type: Number, required: true },
+    date: { type: String },
+});
+
 var User = new mongoose.model("User", userSchema);
+var Exercise = new mongoose.model("Exercise", exerciseSchema);
 
 app.use(express.static(__dirname));
 app.use(cors());
@@ -38,6 +46,16 @@ app.post('/api/exercise/new-user', async (req, res, next) => {
     } catch (error) {
         next({ message: error });
     }
+});
+
+app.post('/api/exercise/add', async (req, res, next) => {
+    const { userId, description, duration, date } = req.body;
+
+    console.log(userId);
+    console.log(description);
+    console.log(duration);
+    console.log(date);
+
 });
 
 app.get('/', (req, res) => {
