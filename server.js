@@ -49,7 +49,12 @@ app.post('/api/exercise/new-user', async (req, res, next) => {
 });
 
 app.post('/api/exercise/add', async (req, res, next) => {
-    const { userId, description, duration, date } = req.body;
+    let { userId, description, duration, date } = req.body;
+    if (date === '') {
+        const actualDate = new Date();
+        date = `${actualDate.getUTCFullYear()}-${actualDate.getUTCMonth() + 1}-${actualDate.getUTCDate()}`;
+    }
+
     const exercise = new Exercise({
         userId: userId,
         description: description,
