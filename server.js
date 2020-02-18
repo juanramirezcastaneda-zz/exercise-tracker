@@ -77,6 +77,19 @@ app.post('/api/exercise/add', async (req, res, next) => {
     }
 });
 
+app.get('/api/exercise/log', (req, res) => {
+    User.findOne({ _id: req.query.userId }, (err, usr) => {
+        Exercise.find({ userId: req.query.userId }, (err1, exercises) => {
+            const totalAmountOfExersice = exercises.reduce((acc, el) => acc + el.duration, 0);
+            res.json({
+                userName: usr.username,
+                count: exercises.length,
+                totalAmountOfTime: totalAmountOfExersice
+            });
+        });
+    });
+});
+
 app.get('/api/exercise/users', (req, res) => {
     User.find({}, function (err, users) {
         var usersResponse = users.map((usr) => ({ _id: usr._id, username: usr.username }));
