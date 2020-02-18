@@ -72,6 +72,13 @@ app.post('/api/exercise/add', async (req, res, next) => {
     }
 });
 
+app.get('/api/exercise/users', (req, res) => {
+    User.find({}, function (err, users) {
+        var usersResponse = users.map((usr) => ({ _id: usr._id, username: usr.username }));
+        res.json(usersResponse);
+    });
+});
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 });
