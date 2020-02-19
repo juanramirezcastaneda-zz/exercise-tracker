@@ -80,6 +80,9 @@ app.post('/api/exercise/add', async (req, res, next) => {
 app.get('/api/exercise/log', (req, res) => {
     User.findOne({ _id: req.query.userId }, (err, usr) => {
         const limitValue = Number(req.query.limit);
+        const fromDate = new Date(req.query.from);
+        const toDate = new Date(req.query.to);
+
         Exercise.find({ userId: req.query.userId }, (err1, exercises) => {
             const totalAmountOfExersice = exercises.reduce((acc, el) => acc + el.duration, 0);
             res.json({
