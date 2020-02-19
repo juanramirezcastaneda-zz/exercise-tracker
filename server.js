@@ -79,6 +79,7 @@ app.post('/api/exercise/add', async (req, res, next) => {
 
 app.get('/api/exercise/log', (req, res) => {
     User.findOne({ _id: req.query.userId }, (err, usr) => {
+        const limitValue = Number(req.query.limit);
         Exercise.find({ userId: req.query.userId }, (err1, exercises) => {
             const totalAmountOfExersice = exercises.reduce((acc, el) => acc + el.duration, 0);
             res.json({
@@ -86,7 +87,7 @@ app.get('/api/exercise/log', (req, res) => {
                 count: exercises.length,
                 totalAmountOfTime: totalAmountOfExersice
             });
-        });
+        }).limit(limitValue);
     });
 });
 
