@@ -85,13 +85,24 @@ app.post('/api/exercise/add', async (req, res, next) => {
 app.get('/api/exercise/log', (req, res) => {
     User.findOne({ _id: req.query.userId }, (err, usr) => {
         const limitValue = Number(req.query.limit);
+        let fromDate, toDate, exerciseClause;
 
-        const [, fromYear, fromMonth, fromDay] = req.query.from && req.query.from.match(dateRegex);
-        const [, toYear, toMonth, toDay] = req.query.to && req.query.to.match(dateRegex);
-        fromDate = new Date(Number(fromYear), Number(fromMonth), Number(fromDay));
-        toDate = new Date(Number(toYear), Number(toMonth), Number(toDay));
+        if (req.query.from) {
+            const [, fromYear, fromMonth, fromDay] = req.query.from.match(dateRegex);
+            fromDate = new Date(Number(fromYear), Number(fromMonth), Number(fromDay));
+        }
 
-        const exerciseClause = { userId: req.query.userId };
+        if (req.query.to) {
+            const [, toYear, toMonth, toDay] = req.query.to.match(dateRegex);
+            toDate = req.query.to && new Date(Number(toYear), Number(toMonth), Number(toDay));
+        }
+
+        // if (fromDate && toDate) {
+        //     exerciseClause = { userId: req.query.userId, date: { $gte: fromDate, $lte: toDate } }
+        // }
+
+        exerciseClause = { userId: req.query.userId };
+        console.log(toDate);
 
         Exercise.find(exerciseClause, (err1, exercises) => {
             const totalAmountOfExersice = exercises.reduce((acc, el) => acc + el.duration, 0);
