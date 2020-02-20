@@ -14,21 +14,23 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/exercise-track
     useUnifiedTopology: true
 });
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+const userSchema = new Schema({
     username: { type: String, required: true }
 });
 
-var exerciseSchema = new Schema({
+const exerciseSchema = new Schema({
     userId: { type: String, required: true },
     description: { type: String, required: true },
     duration: { type: Number, required: true },
     date: { type: Date },
 });
 
-var User = new mongoose.model("User", userSchema);
-var Exercise = new mongoose.model("Exercise", exerciseSchema);
+const User = new mongoose.model("User", userSchema);
+const Exercise = new mongoose.model("Exercise", exerciseSchema);
+
+const dateRegex = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 app.use(express.static(__dirname));
 app.use(cors());
@@ -54,7 +56,7 @@ app.post('/api/exercise/add', async (req, res, next) => {
     if (date === '') {
         date = new Date();
     } else {
-        const [, year, month, day] = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        const [, year, month, day] = date.match(dateRegex);
         date = new Date(Number(year), Number(month), Number(day));
     }
 
@@ -83,10 +85,15 @@ app.post('/api/exercise/add', async (req, res, next) => {
 app.get('/api/exercise/log', (req, res) => {
     User.findOne({ _id: req.query.userId }, (err, usr) => {
         const limitValue = Number(req.query.limit);
-        const fromDate = new Date(req.query.from);
-        const toDate = new Date(req.query.to);
 
-        Exercise.find({ userId: req.query.userId }, (err1, exercises) => {
+        const [, fromYear, fromMonth, fromDay] = req.query.from && req.query.from.match(dateRegex);
+        const [, toYear, toMonth, toDay] = req.query.to && req.query.to.match(dateRegex);
+        fromDate = new Date(Number(fromYear), Number(fromMonth), Number(fromDay));
+        toDate = new Date(Number(toYear), Number(toMonth), Number(toDay));
+
+        const exerciseClause = { userId: req.query.userId };
+
+        Exercise.find(exerciseClause, (err1, exercises) => {
             const totalAmountOfExersice = exercises.reduce((acc, el) => acc + el.duration, 0);
             res.json({
                 userName: usr.username,
