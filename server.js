@@ -97,14 +97,15 @@ app.get('/api/exercise/log', (req, res) => {
             toDate = req.query.to && new Date(Number(toYear), Number(toMonth), Number(toDay));
         }
 
-        // if (fromDate && toDate) {
-        //     exerciseClause = { userId: req.query.userId, date: { $gte: fromDate, $lte: toDate } }
-        // }
+        if (fromDate && toDate) {
 
-        exerciseClause = { userId: req.query.userId };
-        console.log(toDate);
+            exerciseClause = { userId: req.query.userId, date: { $gte: fromDate, $lte: toDate } }
+        } else {
+            exerciseClause = { userId: req.query.userId };
+        }
 
         Exercise.find(exerciseClause, (err1, exercises) => {
+            console.log(exercises.length);
             const totalAmountOfExersice = exercises.reduce((acc, el) => acc + el.duration, 0);
             res.json({
                 userName: usr.username,
