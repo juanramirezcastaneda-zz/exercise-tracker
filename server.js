@@ -24,7 +24,7 @@ var exerciseSchema = new Schema({
     userId: { type: String, required: true },
     description: { type: String, required: true },
     duration: { type: Number, required: true },
-    date: { type: String },
+    date: { type: Date },
 });
 
 var User = new mongoose.model("User", userSchema);
@@ -50,9 +50,12 @@ app.post('/api/exercise/new-user', async (req, res, next) => {
 
 app.post('/api/exercise/add', async (req, res, next) => {
     let { userId, description, duration, date } = req.body;
+    let actualDate;
     if (date === '') {
-        const actualDate = new Date();
-        date = `${actualDate.getUTCFullYear()}-${actualDate.getUTCMonth() + 1}-${actualDate.getUTCDate()}`;
+        date = new Date();
+    } else {
+        const [, year, month, day] = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        date = new Date(Number(year), Number(month), Number(day));
     }
 
     const exercise = new Exercise({
