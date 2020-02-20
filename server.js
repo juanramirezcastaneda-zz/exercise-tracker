@@ -105,7 +105,6 @@ app.get('/api/exercise/log', (req, res) => {
         }
 
         Exercise.find(exerciseClause, (err1, exercises) => {
-            console.log(exercises.length);
             const totalAmountOfExersice = exercises.reduce((acc, el) => acc + el.duration, 0);
             res.json({
                 userName: usr.username,
